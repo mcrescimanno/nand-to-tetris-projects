@@ -1,0 +1,54 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/PC.hdl
+
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    // Pin representing zero or current if exists
+
+    /* 
+    * reset,load,inc, out
+    * 0,0,0, current // 0
+    * 0,0,1, current + 1 // 1
+    * 0,1,0, in // 2
+    * 0,1,1, in // 3
+    * 1,0,0, 0 // 4
+    * 1,0,1, 0 // 5
+    * 1,1,0, 0 // 6
+    * 1,1,1, 0 // 7
+    */
+
+    Not(in=reset,out=notreset);
+    Not(in=load,out=notload);
+    Not(in=inc,out=notinc);
+    And(a=notreset,b=notload,out=notrl);
+
+    And(a=notreset,b=load,out=trueload);
+    And(a=notrl,b=inc,out=trueinc);
+
+    And(a=notrl,b=notinc,out=r1);
+    Not(in=r1,out=loadregister);
+
+    Mux16(a=current,b[0..15]=false,sel=reset,out=reseted); // 0 if reset is 1 , current otherwise
+    Mux16(a=reseted,b=in,sel=trueload,out=loaded);
+
+    // Incremented
+    Add16(a=loaded,b[1..15]=false, b[0]=true,out=added);
+    Mux16(a=loaded,b=added,sel=trueinc,out=nextVal);    
+
+    
+    // Piping nextVal to the next cycle (& also allowing us to use current pin on subsequent calls)
+    Register(in=nextVal,load=loadregister, out=current, out=out);
+}

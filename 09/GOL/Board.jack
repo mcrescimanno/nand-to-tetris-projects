@@ -1,0 +1,148 @@
+class Board {
+	field int totalNumberOfRows, totalNumberOfColumns;
+	field Array rows;
+
+	constructor Board new() {
+		var int bRows, cellHeight;
+		var int i,j;
+		var Array columns;
+		var Cell cellToAddToBoard;
+
+		// Compute total # of rows
+		let bRows = Constants.getSCREEN_BASE_ROWS();
+		let cellHeight = Cell.getCELL_HEIGHT();
+		let totalNumberOfRows = bRows / cellHeight;
+
+		// Compute total # of cols
+		let totalNumberOfColumns = 32; // based on 32 registers per screen line.
+
+		let rows = Array.new(totalNumberOfRows);
+
+		let i = 0;
+		while (i < totalNumberOfRows) {
+			
+			// Initialize loop
+			let columns = Array.new(totalNumberOfColumns);
+			let j = 0;			
+			while (j < totalNumberOfColumns) {
+
+				let cellToAddToBoard = Cell.new(j,i,false);
+				let columns[j] = cellToAddToBoard;
+
+				let j = j + 1;
+			}
+
+			let rows[i] = columns;
+			let i = i + 1;
+		}
+
+		return this;
+	}
+
+	/* Accessors */
+	method int getTotalNumberOfRows() { return totalNumberOfRows; }
+	method int getTotalNumberOfColumns() { return totalNumberOfColumns; }
+
+
+	method void draw() {
+		var int rowInx, colInx;
+		var Array row;
+		var Cell cell;
+
+		let rowInx = 0;
+		while (rowInx < totalNumberOfRows) {
+
+			let row = rows[rowInx];
+			let colInx = 0;
+			while (colInx < totalNumberOfColumns) {
+				let cell = row[colInx];
+				do cell.draw();
+
+				let colInx = colInx + 1;
+			}
+
+			let rowInx = rowInx + 1;
+		}
+
+		return;
+	}
+
+	method Cell getCellAt(int colInx, int rowInx) {
+		var Array row;
+		var Cell cell;
+
+		let row = rows[rowInx];
+		let cell = row[colInx];
+		return cell;
+	}
+
+	method bool getCellStateAt(int colInx, int rowInx) {
+		var Cell cellOnBoard;
+		
+		if (Board.isCellOutOfBounds(colInx, rowInx)) {
+			return false;
+		}
+
+		let cellOnBoard = getCellAt(colInx, rowInx);
+		return cellOnBoard.isAlive();
+	}
+
+	method Array getNeighborsState(Cell cell) {
+		// Compute all 8 possible cell neighbors' state.
+
+		var Array ret;
+		var int cellX, cellY;
+		var Cell cellOnBoard;
+
+		let ret = Array.new(8);
+		let cellX = cell.getX();
+		let cellY = cell.getY();
+
+		//up
+		let ret[0] = getCellStateAt(cellX, cellY - 1);
+
+		// left
+		let ret[1] = getCellStateAt(cellX - 1, cellY);
+
+		// down
+		let ret[2] = getCellStateAt(cellX, cellY + 1);
+
+		// right
+		let ret[3] = getCellStateAt(cellX + 1, cellY);
+
+		// up-left
+		let ret[4] = getCellStateAt(cellX - 1, cellY - 1);
+
+		// down-left
+		let ret[5] = getCellStateAt(cellX - 1, cellY + 1);
+
+		// up-right
+		let ret[6] = getCellStateAt(cellX + 1, cellY - 1);
+
+		// down-right
+		let ret[7] = getCellStateAt(cellX + 1, cellY + 1);
+
+		return ret;
+	}
+
+	method void dispose() {
+		// assuming that deallocating an array deallocs the elements
+		do Memory.deAlloc(rows);
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	function bool isCellOutOfBounds(int cellX, int cellY) {
+		var int cellHeight, endRow, scrEnd;
+		var bool outOfBoundsY, outOfBoundsX;
+
+		let scrEnd = Constants.getSCREEN_BASE_ROWS();
+		let cellHeight = Cell.getCELL_HEIGHT();
+		let endRow = (cellY + 1) * cellHeight;		
+
+		let outOfBoundsY = (endRow < cellHeight) | (endRow > scrEnd);
+		let outOfBoundsX = (cellX < 0) | (cellX > 31);
+		
+		return outOfBoundsY | outOfBoundsX;
+	}
+}

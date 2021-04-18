@@ -1,0 +1,62 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/DMux8Way.hdl
+
+/**
+ * 8-way demultiplexor:
+ * {a, b, c, d, e, f, g, h} = {in, 0, 0, 0, 0, 0, 0, 0} if sel == 000
+ *                            {0, in, 0, 0, 0, 0, 0, 0} if sel == 001
+ *                            {0, 0, in, 0, 0, 0, 0, 0} if sel == 010
+ *                            {0, 0, 0, in, 0, 0, 0, 0} if sel == 011
+ *                            {0, 0, 0, 0, in, 0, 0, 0} if sel == 100
+ *                            {0, 0, 0, 0, 0, in, 0, 0} if sel == 101
+ *                            {0, 0, 0, 0, 0, 0, in, 0} if sel == 110
+ *                            {0, 0, 0, 0, 0, 0, 0, in} if sel == 111
+ */
+
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+
+    PARTS:
+    DMux(in=in,sel=sel[2],a=channel0,b=channel1);
+    DMux4Way(in=channel0,sel=sel[0..1],a=a,b=b,c=c,d=d);
+    DMux4Way(in=channel1,sel=sel[0..1],a=e,b=f,c=g,d=h);
+
+    /* 
+    Low Tech Solution
+    
+    Not(in=sel[0],out=nsel0);
+    Not(in=sel[1],out=nsel1);
+    Not(in=sel[2],out=nsel2);
+
+    // Conds
+    And(a=nsel0,b=nsel1,out=condAE);
+    And(a=sel[0],b=nsel1,out=condBF);
+    And(a=nsel0,b=sel[1],out=condCG);
+    And(a=sel[0],b=sel[1],out=condDH);
+
+    And(a=condAE,b=nsel2,out=condA);
+    And(a=condAE,b=sel[2],out=condE);
+
+    And(a=condBF,b=nsel2,out=condB);
+    And(a=condBF,b=sel[2],out=condF);
+
+    And(a=condCG,b=nsel2,out=condC);
+    And(a=condCG,b=sel[2],out=condG);
+
+    And(a=condDH,b=nsel2,out=condD);
+    And(a=condDH,b=sel[2],out=condH);
+
+    // Outs
+    And(a=condA,b=in,out=a);
+    And(a=condB,b=in,out=b);
+    And(a=condC,b=in,out=c);
+    And(a=condD,b=in,out=d);
+    And(a=condE,b=in,out=e);
+    And(a=condF,b=in,out=f);
+    And(a=condG,b=in,out=g);
+    And(a=condH,b=in,out=h);
+    */
+}

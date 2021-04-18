@@ -1,0 +1,10 @@
+class MainTest {
+	function void main() {
+		var Array a, b;
+
+		let a = Array.new(2);
+		do a.dispose();
+		//let b = Array.new(23);
+		return;
+	}
+}

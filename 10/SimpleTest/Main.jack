@@ -1,0 +1,24 @@
+class Main {
+	field int i,j;
+	static boolean t;
+
+	function void main() {
+		var int size, sizeX;
+		var boolean p;
+		var Array a;
+		var String s;
+		let size = 1;
+		//let x = a[0 + size - sizeX];
+		let sizeX = ~(1 + 2 + a[0]);
+		let sizeX = Main.main2();
+		let s = "adfadsf";
+		let a[1+2+3] = 0;
+
+		let a[0] = Main.main2(1+1, 0, main2());
+
+	}
+
+	function void main2() {
+		
+	}
+}

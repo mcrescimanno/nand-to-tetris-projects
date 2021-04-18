@@ -1,0 +1,25 @@
+class Constants {
+
+	/* Addresses */
+	static int SCREEN_BASE_ADDR;
+
+	/* Screen Constants */
+	static int SCREEN_BASE_ROWS;
+
+	/*Game Constants*/
+	static int TOTAL_NUM_OF_GENS;
+	static int REFRESH_SPEED_MS;
+
+	function int getSCREEN_BASE_ADDR() { return SCREEN_BASE_ADDR; }
+	function int getSCREEN_BASE_ROWS() { return SCREEN_BASE_ROWS; }
+	function int getTOTAL_NUM_OF_GENS() { return TOTAL_NUM_OF_GENS; }
+	function int getREFRESH_SPEED_MS() { return REFRESH_SPEED_MS; }
+
+	function void init() {
+		let SCREEN_BASE_ADDR = 16384;
+		let SCREEN_BASE_ROWS = 256;
+		let TOTAL_NUM_OF_GENS = 120;
+		let REFRESH_SPEED_MS = 0;
+		return;
+	}
+}

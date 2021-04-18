@@ -1,0 +1,7 @@
+class MainTest {
+	function int main() {
+		var int x;
+		let x = Math.sqrt(9);
+		return x;
+	}
+}

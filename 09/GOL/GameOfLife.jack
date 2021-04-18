@@ -1,0 +1,156 @@
+class GameOfLife {
+	field Board board;
+
+	constructor GameOfLife new () {
+		let board = Board.new();
+		return this;
+	}
+
+	/* Accessors */
+
+	method Board getBoard() { return board; }
+
+	method void initializeBoard() {
+		// Sets the initial board cell state and draws board
+
+		do drawDonut(12,5);
+		do drawDonut(12,9);
+
+		do board.draw();
+		return;
+	}
+
+	method void beginGame() {
+		/* Locals to compute next gen */
+		var Array neighborsState;
+		var Cell currentCell;
+		var bool nextGenCellState;
+		var CellLinkedList cellsToUpdate;
+
+		/* Loop vars */
+		var int generation_inx;
+		var int rowInx, colInx;
+
+		let generation_inx = 0;
+
+		while (generation_inx < Constants.getTOTAL_NUM_OF_GENS()) {
+			let rowInx = 0;
+			let cellsToUpdate = CellLinkedList.new();
+
+			while (rowInx < board.getTotalNumberOfRows()) {
+				let colInx = 0;
+
+				while (colInx < board.getTotalNumberOfColumns()) {
+					let currentCell = board.getCellAt(colInx, rowInx);
+					let neighborsState = board.getNeighborsState(currentCell);
+					let nextGenCellState = computeNextGenCellState(currentCell, neighborsState);
+
+					/*dispose of neighbor state bc we don't need it after we compute the next cell state.*/
+					do Memory.deAlloc(neighborsState);
+
+
+					// if nextGenState != currentGenState, change it and redraw that cell.
+					if (~currentCell.isAlive() = nextGenCellState) {
+						do cellsToUpdate.insert(currentCell);
+					}
+
+					let colInx = colInx + 1;
+				}
+
+				let rowInx = rowInx + 1;
+			}
+
+			do flipCellsAndRedraw(cellsToUpdate);
+			/*dispose of cellsToUpdate bc we do not need it anymore.*/
+			do cellsToUpdate.dispose();
+
+			// Wait a full second bt generations, so we can see them well enough.
+			//do Sys.wait(Constants.getREFRESH_SPEED_MS());
+			let generation_inx = generation_inx + 1;
+		}
+
+		return;
+	}
+
+	method bool computeNextGenCellState(Cell cell, Array neighborsState) {
+		/* Rules:
+			true, if live cell with 2 or 3 live neighbors. 
+			true, if dead cell with 3 live neighbors
+			else false
+		*/
+
+		var int i, numLiveNeighbors;
+		var bool status, birth, stayAlive;
+
+		let i = 0;
+		let numLiveNeighbors = 0;
+		while (i < 8) {
+			let status = neighborsState[i];
+			if (status) {
+				let numLiveNeighbors = numLiveNeighbors + 1;
+			}
+			let i = i + 1;
+		}
+
+		let stayAlive = cell.isAlive() & ((numLiveNeighbors = 2) | (numLiveNeighbors = 3));
+		let birth = ~cell.isAlive() & (numLiveNeighbors = 3);
+
+		return stayAlive | birth;
+	}
+
+	method void flipCellsAndRedraw(CellLinkedList l) {
+		var Cell cell;
+		var CellLinkedList tail;
+
+		let cell = l.getElement();
+		if (cell = null) {
+			return;
+		}
+
+		do cell.setIsAlive(~cell.isAlive());
+		do cell.draw();
+
+		do flipCellsAndRedraw(l.getTail());
+		return;
+	}
+
+	method void drawDonut(int startX, int startY) {
+		var Cell cell;
+		var int topRowY, bottomRowY;
+
+		let topRowY = startY - 1;
+		let bottomRowY = startY + 1;
+
+		let cell = board.getCellAt(startX, startY);
+		do cell.setIsAlive(true);
+
+		let cell = board.getCellAt(startX + 1, topRowY);
+		do cell.setIsAlive(true);
+
+		let cell = board.getCellAt(startX + 2, topRowY);
+		do cell.setIsAlive(true);
+
+		let cell = board.getCellAt(startX + 3, topRowY);
+		do cell.setIsAlive(true);
+
+		let cell = board.getCellAt(startX + 1, bottomRowY);
+		do cell.setIsAlive(true);
+
+		let cell = board.getCellAt(startX + 2, bottomRowY);
+		do cell.setIsAlive(true);
+
+		let cell = board.getCellAt(startX + 3, bottomRowY);
+		do cell.setIsAlive(true);
+
+		let cell = board.getCellAt(startX + 4, startY);
+		do cell.setIsAlive(true);
+		return;
+	}
+
+	method void dispose() {
+		do board.dispose();
+		do Memory.deAlloc(this);
+
+		return;
+	}
+}

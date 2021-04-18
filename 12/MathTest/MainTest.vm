@@ -1,0 +1,6 @@
+function MainTest.main 1
+push constant 9
+call Math.sqrt 1
+pop local 0
+push local 0
+return

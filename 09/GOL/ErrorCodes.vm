@@ -1,0 +1,13 @@
+function ErrorCodes.getCELL_X_OUT_OF_BOUND 0
+push static 0
+return
+function ErrorCodes.getCELL_Y_OUT_OF_BOUND 0
+push static 1
+return
+function ErrorCodes.init 0
+push constant 100
+pop static 0
+push constant 200
+pop static 1
+push constant 0
+return

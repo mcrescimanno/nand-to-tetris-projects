@@ -1,0 +1,57 @@
+class CellLinkedList {
+	field CellLinkedList tail;
+	field Cell val;
+
+	constructor CellLinkedList new() {
+		let val = null;
+		let tail = null;
+		return this;
+	}
+
+	/*
+		constructor CellLinkedList new(Cell c) {
+			let val = c;
+			let tail = null;
+			return this;
+		}
+	*/
+
+	/* Accessors */
+
+	method Cell getElement() { return val; }
+	method CellLinkedList getTail() { return tail; }
+
+	method void insert(Cell c) {
+		if (tail = null) {
+			let val = c;
+			let tail = CellLinkedList.new();
+			return;
+		}
+
+		do tail.insert(c);
+		return;
+	}
+
+	method void dispose() {
+		if (tail = null) {
+			do Memory.deAlloc(this);
+			return;
+		}
+
+		do tail.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	method void print() {
+		if (tail = null) {
+			return;
+		}
+
+		do val.print();
+		do Output.println();
+
+		do tail.print();
+		return;
+	}
+}

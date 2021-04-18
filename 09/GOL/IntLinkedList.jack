@@ -1,0 +1,43 @@
+class IntLinkedList {
+	field IntLinkedList tail;
+	field int val;
+
+	constructor IntLinkedList new(int c) {
+		let val = c;
+		let tail = null;
+		return this;
+	}
+
+	method void insert(int c) {
+		if (tail = null) {
+			let tail = IntLinkedList.new(c);
+			return;
+		}
+
+		do tail.insert(c);
+		return;
+	}
+
+	method void dispose() {
+		if (tail = null) {
+			do Memory.deAlloc(this);
+			return;
+		}
+
+		do tail.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	method void print() {
+		do Output.printInt(val);
+		do Output.println();
+		
+		if (tail = null) {
+			return;
+		}
+
+		do tail.print();
+		return;
+	}
+}

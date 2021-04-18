@@ -1,0 +1,8 @@
+function SimpleFunction.test 2
+push local 0
+push local 1
+add
+label DONE
+push local 0
+if-goto DONE
+return

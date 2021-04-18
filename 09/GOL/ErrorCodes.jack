@@ -1,0 +1,15 @@
+class ErrorCodes {
+	
+	static int CELL_X_OUT_OF_BOUND;
+	static int CELL_Y_OUT_OF_BOUND;
+
+	/* Accessors */
+	function int getCELL_X_OUT_OF_BOUND() { return CELL_X_OUT_OF_BOUND; }
+	function int getCELL_Y_OUT_OF_BOUND() { return CELL_Y_OUT_OF_BOUND; }
+
+	function void init() {
+		let CELL_X_OUT_OF_BOUND = 100;
+		let CELL_Y_OUT_OF_BOUND = 200;
+		return;
+	}
+}

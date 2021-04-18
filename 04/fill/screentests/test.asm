@@ -1,0 +1,7 @@
+@SCREEN
+D=A
+@32
+D=D+A
+
+A=D
+M=-1

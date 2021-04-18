@@ -1,0 +1,195 @@
+function Cell.new 4
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+push argument 1
+push static 0
+call Math.multiply 2
+push static 0
+add
+pop local 1
+push argument 0
+push constant 0
+lt
+push argument 0
+or
+push constant 31
+gt
+pop local 2
+push local 1
+push constant 0
+lt
+push local 1
+or
+push constant 256
+gt
+pop local 3
+push local 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+call ErrorCodes.getCELL_X_OUT_OF_BOUND 0
+pop local 0
+push local 0
+call Sys.error 1
+pop temp 0
+label IF_FALSE0
+push local 3
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+call ErrorCodes.getCELL_Y_OUT_OF_BOUND 0
+pop local 0
+push local 0
+call Sys.error 1
+pop temp 0
+label IF_FALSE1
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 2
+pop this 2
+push pointer 0
+return
+function Cell.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Cell.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Cell.isAlive 0
+push argument 0
+pop pointer 0
+push this 2
+return
+function Cell.setX 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 0
+push constant 0
+return
+function Cell.setY 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 1
+push constant 0
+return
+function Cell.setIsAlive 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 2
+push constant 0
+return
+function Cell.draw 4
+push argument 0
+pop pointer 0
+call Constants.getSCREEN_BASE_ADDR 0
+pop local 0
+push constant 0
+pop local 3
+push this 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 1
+neg
+pop local 3
+label IF_FALSE0
+push local 0
+push this 1
+push constant 32
+call Math.multiply 2
+push static 0
+call Math.multiply 2
+add
+push this 0
+add
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push static 0
+lt
+not
+if-goto WHILE_END0
+push local 0
+push constant 32
+push local 1
+call Math.multiply 2
+add
+pop local 2
+push local 2
+push local 3
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Cell.print 0
+push argument 0
+pop pointer 0
+push constant 1
+call String.new 1
+push constant 91
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 0
+call Output.printInt 1
+pop temp 0
+push constant 1
+call String.new 1
+push constant 44
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 1
+call Output.printInt 1
+pop temp 0
+push constant 1
+call String.new 1
+push constant 44
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 2
+call Utils.printBool 1
+pop temp 0
+push constant 1
+call String.new 1
+push constant 93
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 0
+return
+function Cell.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Cell.getCELL_HEIGHT 0
+push static 0
+return
+function Cell.init 0
+push constant 16
+pop static 0
+push constant 0
+return

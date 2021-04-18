@@ -1,0 +1,76 @@
+function IntLinkedList.new 0
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 1
+push constant 0
+pop this 0
+push pointer 0
+return
+function IntLinkedList.insert 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 1
+call IntLinkedList.new 1
+pop this 0
+push constant 0
+return
+label IF_FALSE0
+push this 0
+push argument 1
+call IntLinkedList.insert 2
+pop temp 0
+push constant 0
+return
+function IntLinkedList.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+label IF_FALSE0
+push this 0
+call IntLinkedList.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function IntLinkedList.print 0
+push argument 0
+pop pointer 0
+push this 1
+call Output.printInt 1
+pop temp 0
+call Output.println 0
+pop temp 0
+push this 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push this 0
+call IntLinkedList.print 1
+pop temp 0
+push constant 0
+return

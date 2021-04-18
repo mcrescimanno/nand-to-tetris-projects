@@ -1,0 +1,84 @@
+class Cell {
+	field int x,y;
+	field bool isAlive;
+	static int CELL_HEIGHT;
+
+	constructor Cell new(int gridX, int gridY, bool alive) {
+		var int errorCode, endRow;
+		var bool overflowX, overflowY;
+
+		let endRow = (gridY * CELL_HEIGHT) + CELL_HEIGHT;
+		let overflowX = gridX < 0 | gridX > 31;
+		let overflowY = endRow < 0 | endRow > 256;
+
+		if (overflowX) {
+			let errorCode = ErrorCodes.getCELL_X_OUT_OF_BOUND();
+			do Sys.error(errorCode);
+		}
+
+		if (overflowY) {
+			let errorCode = ErrorCodes.getCELL_Y_OUT_OF_BOUND();
+			do Sys.error(errorCode);
+		}
+
+		let x = gridX; 
+		let y = gridY;
+		let isAlive = alive;
+		return this;
+	}
+
+	/* Accessors */
+
+	method int getX() { return x; }
+	method int getY() { return y; }
+	method bool isAlive() { return isAlive; }
+
+	method void setX(int newX) { let x = newX; return; }
+	method void setY(int newY) { let y = newY; return; }
+	method void setIsAlive(bool alive) { let isAlive = alive; return; }
+
+	/* Other */
+
+	method void draw() {
+		var int baseMemAddress, i, nextAddr, fillColor;
+
+		let baseMemAddress = Constants.getSCREEN_BASE_ADDR();
+		let fillColor = 0;
+		if (isAlive) { let fillColor = -1; }
+
+		let baseMemAddress = baseMemAddress + (y * 32 * CELL_HEIGHT) + x;
+		let i = 0;
+
+		while(i < CELL_HEIGHT) {
+			let nextAddr = baseMemAddress + (32 * i);
+			do Memory.poke(nextAddr, fillColor);
+			let i = i + 1;
+		}
+
+		return;
+	}
+
+	method void print() {
+		do Output.printString("[");
+		do Output.printInt(x);
+		do Output.printString(",");
+		do Output.printInt(y);
+		do Output.printString(",");
+		do Utils.printBool(isAlive);
+		do Output.printString("]");
+		return;
+	}
+
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	/* Static Accessors */
+	function int getCELL_HEIGHT() { return CELL_HEIGHT; }
+
+	function void init() {
+		let CELL_HEIGHT = 16;
+		return;
+	}
+}

@@ -1,0 +1,7 @@
+label LABEL
+push constant 34
+push constant 0
+push constant 0
+eq
+if-goto LABEL
+

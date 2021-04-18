@@ -1,0 +1,23 @@
+function Constants.getSCREEN_BASE_ADDR 0
+push static 0
+return
+function Constants.getSCREEN_BASE_ROWS 0
+push static 1
+return
+function Constants.getTOTAL_NUM_OF_GENS 0
+push static 2
+return
+function Constants.getREFRESH_SPEED_MS 0
+push static 3
+return
+function Constants.init 0
+push constant 16384
+pop static 0
+push constant 256
+pop static 1
+push constant 120
+pop static 2
+push constant 0
+pop static 3
+push constant 0
+return

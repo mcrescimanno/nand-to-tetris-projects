@@ -1,0 +1,246 @@
+// push constant 3030
+@3030
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 0
+@0
+D=A
+@__COND_THIS_0
+D;JEQ
+@__COND_THAT_0
+0;JMP
+(__COND_THIS_0)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THIS
+	M=D
+	@__PTR_CONT_0
+	0;JMP
+(__COND_THAT_0)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THAT
+	M=D
+	@__PTR_CONT_0
+	0;JMP
+(__PTR_CONT_0)
+0
+// push constant 3040
+@3040
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 1
+@1
+D=A
+@__COND_THIS_1
+D;JEQ
+@__COND_THAT_1
+0;JMP
+(__COND_THIS_1)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THIS
+	M=D
+	@__PTR_CONT_1
+	0;JMP
+(__COND_THAT_1)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THAT
+	M=D
+	@__PTR_CONT_1
+	0;JMP
+(__PTR_CONT_1)
+0
+// push constant 32
+@32
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop this 2
+@THIS
+D=M
+@SP
+A=M
+M=D
+@2
+D=A
+@SP
+A=M
+M=M+D
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M+1
+A=M
+A=M
+M=D
+@SP
+M=M-1
+// push constant 46
+@46
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop that 6
+@THAT
+D=M
+@SP
+A=M
+M=D
+@6
+D=A
+@SP
+A=M
+M=M+D
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M+1
+A=M
+A=M
+M=D
+@SP
+M=M-1
+// push pointer 0
+@0
+D=A
+@__COND_THIS_2
+D;JEQ
+@__COND_THAT_2
+0;JMP
+(__COND_THIS_2)
+	@THIS
+	D=M
+	@__PTR_CONT_2
+	0;JMP
+(__COND_THAT_2)
+	@THAT
+	D=M
+	@__PTR_CONT_2
+	0;JMP
+(__PTR_CONT_2)
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push pointer 1
+@1
+D=A
+@__COND_THIS_3
+D;JEQ
+@__COND_THAT_3
+0;JMP
+(__COND_THIS_3)
+	@THIS
+	D=M
+	@__PTR_CONT_3
+	0;JMP
+(__COND_THAT_3)
+	@THAT
+	D=M
+	@__PTR_CONT_3
+	0;JMP
+(__PTR_CONT_3)
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=M+D
+@SP
+M=M+1
+// push this 2
+@THIS
+D=M
+@SP
+A=M
+M=D
+@2
+D=A
+@SP
+A=M
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// sub
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=M-D
+@SP
+M=M+1
+// push that 6
+@THAT
+D=M
+@SP
+A=M
+M=D
+@6
+D=A
+@SP
+A=M
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=M+D
+@SP
+M=M+1
+(__END)
+@__END
+0;JMP

@@ -1,0 +1,93 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * This library provides two services: direct access to the computer's main
+ * memory (RAM), and allocation and recycling of memory blocks. The Hack RAM
+ * consists of 32,768 words, each holding a 16-bit binary number.
+ */ 
+class Memory {
+    static Array ram;
+    static Array heap;
+    static int freeList;
+    /** Initializes the class. */
+    function void init() {
+        let ram = 0;
+        let heap = 2048;
+        let freeList = 2048;
+        let heap[0] = 0; // pointer to the next free array node
+        let heap[1] = 14334;
+        return;
+    }
+
+    /** Returns the RAM value at the given address. */
+    function int peek(int address) {
+        return ram[address];
+    }
+
+    /** Sets the RAM value at the given address to the given value. */
+    function void poke(int address, int value) {
+        let ram[address] = value;
+        return;
+    }
+
+    /** Finds an available RAM block of the given size and returns
+     *  a reference to its base address. */
+    function int alloc(int size) {
+        var int curFreeListAddress, sizeFree, nextFreeListAddr, distFromHeapBase;
+        var int totalSizeRequired, lastFreeAddr, blockAddrInRAM, blockAddrInHeap;
+        var boolean possible;
+
+        let totalSizeRequired = size + 2;
+        let curFreeListAddress = freeList;
+        while (~(curFreeListAddress = 0)) {
+            let distFromHeapBase = curFreeListAddress - heap;
+            let nextFreeListAddr = heap[distFromHeapBase];
+            let sizeFree = heap[distFromHeapBase + 1];
+
+            let possible = ~(sizeFree < totalSizeRequired);
+            if (possible) {
+                // currentSizeOfFreeList = currentSizeOfFreeList - totalSizeRequired. (if 0, do we remove from Linked List?)
+                let heap[distFromHeapBase + 1] = sizeFree - totalSizeRequired; 
+                // 2. Calculate Block Address and return it to caller.    
+                let lastFreeAddr = curFreeListAddress + 2 + sizeFree;
+                let blockAddrInRAM = lastFreeAddr - size;
+                let blockAddrInHeap = blockAddrInRAM - heap;
+                let heap[blockAddrInHeap - 1] = size;
+                return blockAddrInRAM;                
+            }
+            else {
+                let curFreeListAddress = nextFreeListAddr;
+            }
+        }        
+        return 0; // Hope we don't get here.
+    }
+
+    /** De-allocates the given object (cast as an array) by making
+     *  it available for future allocations. */
+    function void deAlloc(Array o) {
+        var int curFreeListAddress, distFromHeapBase, objAddrInHeap;
+        var boolean processingFinalNode;
+        var int nextFreeListAddr;
+
+        let objAddrInHeap = o - heap;
+        let curFreeListAddress = freeList;
+        while (~(curFreeListAddress = 0)) {
+            let distFromHeapBase = curFreeListAddress - heap;
+            let nextFreeListAddr = heap[distFromHeapBase];
+            let processingFinalNode = nextFreeListAddr = 0;
+
+            if (processingFinalNode) {
+                let heap[distFromHeapBase] = o - 2; // append address of new free list (based on block address given by client)
+                let heap[objAddrInHeap - 2] = 0; // newly appended list node is now last in the list.
+                return;
+            }                        
+
+            let curFreeListAddress = nextFreeListAddr;
+        }
+
+        return;
+    }    
+}

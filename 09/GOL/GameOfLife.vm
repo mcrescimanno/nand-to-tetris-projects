@@ -1,0 +1,325 @@
+function GameOfLife.new 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+call Board.new 0
+pop this 0
+push pointer 0
+return
+function GameOfLife.getBoard 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function GameOfLife.initializeBoard 0
+push argument 0
+pop pointer 0
+push pointer 0
+push constant 12
+push constant 5
+call GameOfLife.drawDonut 3
+pop temp 0
+push pointer 0
+push constant 12
+push constant 9
+call GameOfLife.drawDonut 3
+pop temp 0
+push this 0
+call Board.draw 1
+pop temp 0
+push constant 0
+return
+function GameOfLife.beginGame 7
+push argument 0
+pop pointer 0
+push constant 0
+pop local 4
+label WHILE_EXP0
+push local 4
+call Constants.getTOTAL_NUM_OF_GENS 0
+lt
+not
+if-goto WHILE_END0
+push constant 0
+pop local 5
+call CellLinkedList.new 0
+pop local 3
+label WHILE_EXP1
+push local 5
+push this 0
+call Board.getTotalNumberOfRows 1
+lt
+not
+if-goto WHILE_END1
+push constant 0
+pop local 6
+label WHILE_EXP2
+push local 6
+push this 0
+call Board.getTotalNumberOfColumns 1
+lt
+not
+if-goto WHILE_END2
+push this 0
+push local 6
+push local 5
+call Board.getCellAt 3
+pop local 1
+push this 0
+push local 1
+call Board.getNeighborsState 2
+pop local 0
+push pointer 0
+push local 1
+push local 0
+call GameOfLife.computeNextGenCellState 3
+pop local 2
+push local 0
+call Memory.deAlloc 1
+pop temp 0
+push local 1
+call Cell.isAlive 1
+not
+push local 2
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 3
+push local 1
+call CellLinkedList.insert 2
+pop temp 0
+label IF_FALSE0
+push local 6
+push constant 1
+add
+pop local 6
+goto WHILE_EXP2
+label WHILE_END2
+push local 5
+push constant 1
+add
+pop local 5
+goto WHILE_EXP1
+label WHILE_END1
+push pointer 0
+push local 3
+call GameOfLife.flipCellsAndRedraw 2
+pop temp 0
+push local 3
+call CellLinkedList.dispose 1
+pop temp 0
+push local 4
+push constant 1
+add
+pop local 4
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function GameOfLife.computeNextGenCellState 5
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 0
+push constant 8
+lt
+not
+if-goto WHILE_END0
+push local 0
+push argument 2
+add
+pop pointer 1
+push that 0
+pop local 2
+push local 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 1
+push constant 1
+add
+pop local 1
+label IF_FALSE0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push argument 1
+call Cell.isAlive 1
+push local 1
+push constant 2
+eq
+push local 1
+push constant 3
+eq
+or
+and
+pop local 4
+push argument 1
+call Cell.isAlive 1
+not
+push local 1
+push constant 3
+eq
+and
+pop local 3
+push local 4
+push local 3
+or
+return
+function GameOfLife.flipCellsAndRedraw 2
+push argument 0
+pop pointer 0
+push argument 1
+call CellLinkedList.getElement 1
+pop local 0
+push local 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push local 0
+push local 0
+call Cell.isAlive 1
+not
+call Cell.setIsAlive 2
+pop temp 0
+push local 0
+call Cell.draw 1
+pop temp 0
+push pointer 0
+push argument 1
+call CellLinkedList.getTail 1
+call GameOfLife.flipCellsAndRedraw 2
+pop temp 0
+push constant 0
+return
+function GameOfLife.drawDonut 3
+push argument 0
+pop pointer 0
+push argument 2
+push constant 1
+sub
+pop local 1
+push argument 2
+push constant 1
+add
+pop local 2
+push this 0
+push argument 1
+push argument 2
+call Board.getCellAt 3
+pop local 0
+push local 0
+push constant 0
+not
+call Cell.setIsAlive 2
+pop temp 0
+push this 0
+push argument 1
+push constant 1
+add
+push local 1
+call Board.getCellAt 3
+pop local 0
+push local 0
+push constant 0
+not
+call Cell.setIsAlive 2
+pop temp 0
+push this 0
+push argument 1
+push constant 2
+add
+push local 1
+call Board.getCellAt 3
+pop local 0
+push local 0
+push constant 0
+not
+call Cell.setIsAlive 2
+pop temp 0
+push this 0
+push argument 1
+push constant 3
+add
+push local 1
+call Board.getCellAt 3
+pop local 0
+push local 0
+push constant 0
+not
+call Cell.setIsAlive 2
+pop temp 0
+push this 0
+push argument 1
+push constant 1
+add
+push local 2
+call Board.getCellAt 3
+pop local 0
+push local 0
+push constant 0
+not
+call Cell.setIsAlive 2
+pop temp 0
+push this 0
+push argument 1
+push constant 2
+add
+push local 2
+call Board.getCellAt 3
+pop local 0
+push local 0
+push constant 0
+not
+call Cell.setIsAlive 2
+pop temp 0
+push this 0
+push argument 1
+push constant 3
+add
+push local 2
+call Board.getCellAt 3
+pop local 0
+push local 0
+push constant 0
+not
+call Cell.setIsAlive 2
+pop temp 0
+push this 0
+push argument 1
+push constant 4
+add
+push argument 2
+call Board.getCellAt 3
+pop local 0
+push local 0
+push constant 0
+not
+call Cell.setIsAlive 2
+pop temp 0
+push constant 0
+return
+function GameOfLife.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call Board.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

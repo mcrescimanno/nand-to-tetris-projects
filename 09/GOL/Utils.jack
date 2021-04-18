@@ -1,0 +1,36 @@
+class Utils {
+	
+	function void printNeighborStates(Array a) {
+		var bool state;
+		var String stateString;
+
+		var int i;
+
+		while (i < 8) {
+			let state = a[i];
+
+			do Utils.printBool(state);
+			do Output.println();
+
+			let i = i + 1;
+		}
+
+		return;
+	}
+
+	function void printBool(bool b) {
+		var String str;
+
+		if (b) {
+			let str = "true";
+		}
+
+		if (~b) {
+			let str = "false";
+		}
+
+		do Output.printString(str);
+
+		return;
+	}
+}

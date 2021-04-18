@@ -1,0 +1,9 @@
+function MainTest.main 2
+push constant 2
+call Array.new 1
+pop local 0
+push local 0
+call Array.dispose 1
+pop temp 0
+push constant 0
+return

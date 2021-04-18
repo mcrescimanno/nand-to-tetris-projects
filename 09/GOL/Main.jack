@@ -1,0 +1,29 @@
+class Main {
+	function void main() {
+		/* var Cell cell;
+		var Array ns;
+		var Board board;
+		var int i;
+		var bool test;
+		var CellLinkedList l; */
+
+		var GameOfLife game;
+
+		do Main.init();
+
+		let game = GameOfLife.new();
+		do game.initializeBoard();
+
+		do game.beginGame();	 
+
+		return;
+	}
+
+	function void init() {
+		do ErrorCodes.init();
+		do Constants.init();
+		do Cell.init();
+
+		return;
+	}
+}

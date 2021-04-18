@@ -1,0 +1,838 @@
+// HACK bootstrap
+@256
+D=A
+@SP
+M=D
+@Sys.init$ret.0
+D=A
+@SP
+A=M
+M=D
+@LCL
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@ARG
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@THAT
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@SP
+M=M+1
+@5
+D=A
+@0
+D=D+A
+@SP
+D=M-D
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Sys.init
+0;JMP
+(Sys.init$ret.0)
+// function Sys.init 0
+(Sys.init)
+@0
+D=A
+(__FUNCTION_LOOP_1)
+@__FUNCTION_PUSH_LOCAL_1
+D;JNE
+@__FUNCTION_CONT_1
+0;JMP
+(__FUNCTION_PUSH_LOCAL_1)
+@SP
+A=M
+M=0
+@SP
+M=M+1
+D=D-1
+@__FUNCTION_LOOP_1
+0;JMP
+(__FUNCTION_CONT_1)
+// push constant 4000
+@4000
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 0
+@0
+D=A
+@__COND_THIS_2
+D;JEQ
+@__COND_THAT_2
+0;JMP
+(__COND_THIS_2)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THIS
+	M=D
+	@__PTR_CONT_2
+	0;JMP
+(__COND_THAT_2)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THAT
+	M=D
+	@__PTR_CONT_2
+	0;JMP
+(__PTR_CONT_2)
+0
+// push constant 5000
+@5000
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 1
+@1
+D=A
+@__COND_THIS_3
+D;JEQ
+@__COND_THAT_3
+0;JMP
+(__COND_THIS_3)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THIS
+	M=D
+	@__PTR_CONT_3
+	0;JMP
+(__COND_THAT_3)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THAT
+	M=D
+	@__PTR_CONT_3
+	0;JMP
+(__PTR_CONT_3)
+0
+// call Sys.main 0
+@Sys.main$ret.4
+D=A
+@SP
+A=M
+M=D
+@LCL
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@ARG
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@THAT
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@SP
+M=M+1
+@5
+D=A
+@0
+D=D+A
+@SP
+D=M-D
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Sys.main
+0;JMP
+(Sys.main$ret.4)
+// pop temp 1
+@5
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@SP
+A=M
+M=M+D
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M+1
+A=M
+A=M
+M=D
+@SP
+M=M-1
+// label LOOP
+(Sys.init$LOOP)
+// goto LOOP
+@Sys.init$LOOP
+0;JMP
+// function Sys.main 5
+(Sys.main)
+@5
+D=A
+(__FUNCTION_LOOP_5)
+@__FUNCTION_PUSH_LOCAL_5
+D;JNE
+@__FUNCTION_CONT_5
+0;JMP
+(__FUNCTION_PUSH_LOCAL_5)
+@SP
+A=M
+M=0
+@SP
+M=M+1
+D=D-1
+@__FUNCTION_LOOP_5
+0;JMP
+(__FUNCTION_CONT_5)
+// push constant 4001
+@4001
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 0
+@0
+D=A
+@__COND_THIS_6
+D;JEQ
+@__COND_THAT_6
+0;JMP
+(__COND_THIS_6)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THIS
+	M=D
+	@__PTR_CONT_6
+	0;JMP
+(__COND_THAT_6)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THAT
+	M=D
+	@__PTR_CONT_6
+	0;JMP
+(__PTR_CONT_6)
+0
+// push constant 5001
+@5001
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 1
+@1
+D=A
+@__COND_THIS_7
+D;JEQ
+@__COND_THAT_7
+0;JMP
+(__COND_THIS_7)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THIS
+	M=D
+	@__PTR_CONT_7
+	0;JMP
+(__COND_THAT_7)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THAT
+	M=D
+	@__PTR_CONT_7
+	0;JMP
+(__PTR_CONT_7)
+0
+// push constant 200
+@200
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop local 1
+@LCL
+D=M
+@SP
+A=M
+M=D
+@1
+D=A
+@SP
+A=M
+M=M+D
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M+1
+A=M
+A=M
+M=D
+@SP
+M=M-1
+// push constant 40
+@40
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop local 2
+@LCL
+D=M
+@SP
+A=M
+M=D
+@2
+D=A
+@SP
+A=M
+M=M+D
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M+1
+A=M
+A=M
+M=D
+@SP
+M=M-1
+// push constant 6
+@6
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop local 3
+@LCL
+D=M
+@SP
+A=M
+M=D
+@3
+D=A
+@SP
+A=M
+M=M+D
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M+1
+A=M
+A=M
+M=D
+@SP
+M=M-1
+// push constant 123
+@123
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// call Sys.add12 1
+@Sys.add12$ret.8
+D=A
+@SP
+A=M
+M=D
+@LCL
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@ARG
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@THAT
+D=M
+@SP
+M=M+1
+A=M
+M=D
+@SP
+M=M+1
+@5
+D=A
+@1
+D=D+A
+@SP
+D=M-D
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Sys.add12
+0;JMP
+(Sys.add12$ret.8)
+// pop temp 0
+@5
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@SP
+A=M
+M=M+D
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M+1
+A=M
+A=M
+M=D
+@SP
+M=M-1
+// push local 0
+@LCL
+D=M
+@SP
+A=M
+M=D
+@0
+D=A
+@SP
+A=M
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push local 1
+@LCL
+D=M
+@SP
+A=M
+M=D
+@1
+D=A
+@SP
+A=M
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push local 2
+@LCL
+D=M
+@SP
+A=M
+M=D
+@2
+D=A
+@SP
+A=M
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push local 3
+@LCL
+D=M
+@SP
+A=M
+M=D
+@3
+D=A
+@SP
+A=M
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push local 4
+@LCL
+D=M
+@SP
+A=M
+M=D
+@4
+D=A
+@SP
+A=M
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=M+D
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=M+D
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=M+D
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=M+D
+@SP
+M=M+1
+// return
+@LCL
+D=M
+@R13
+M=D
+@5
+D=D-A
+A=D
+D=M
+@R14
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@ARG
+A=M
+M=D
+@ARG
+D=M
+@SP
+M=D+1
+@R13
+D=M
+@1
+D=D-A
+A=D
+D=M
+@THAT
+M=D
+@R13
+D=M
+@2
+D=D-A
+A=D
+D=M
+@THIS
+M=D
+@R13
+D=M
+@3
+D=D-A
+A=D
+D=M
+@ARG
+M=D
+@R13
+D=M
+@4
+D=D-A
+A=D
+D=M
+@LCL
+M=D
+@R14
+A=M
+0;JMP
+// function Sys.add12 0
+(Sys.add12)
+@0
+D=A
+(__FUNCTION_LOOP_9)
+@__FUNCTION_PUSH_LOCAL_9
+D;JNE
+@__FUNCTION_CONT_9
+0;JMP
+(__FUNCTION_PUSH_LOCAL_9)
+@SP
+A=M
+M=0
+@SP
+M=M+1
+D=D-1
+@__FUNCTION_LOOP_9
+0;JMP
+(__FUNCTION_CONT_9)
+// push constant 4002
+@4002
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 0
+@0
+D=A
+@__COND_THIS_10
+D;JEQ
+@__COND_THAT_10
+0;JMP
+(__COND_THIS_10)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THIS
+	M=D
+	@__PTR_CONT_10
+	0;JMP
+(__COND_THAT_10)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THAT
+	M=D
+	@__PTR_CONT_10
+	0;JMP
+(__PTR_CONT_10)
+0
+// push constant 5002
+@5002
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 1
+@1
+D=A
+@__COND_THIS_11
+D;JEQ
+@__COND_THAT_11
+0;JMP
+(__COND_THIS_11)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THIS
+	M=D
+	@__PTR_CONT_11
+	0;JMP
+(__COND_THAT_11)
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@THAT
+	M=D
+	@__PTR_CONT_11
+	0;JMP
+(__PTR_CONT_11)
+0
+// push argument 0
+@ARG
+D=M
+@SP
+A=M
+M=D
+@0
+D=A
+@SP
+A=M
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push constant 12
+@12
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=M+D
+@SP
+M=M+1
+// return
+@LCL
+D=M
+@R13
+M=D
+@5
+D=D-A
+A=D
+D=M
+@R14
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@ARG
+A=M
+M=D
+@ARG
+D=M
+@SP
+M=D+1
+@R13
+D=M
+@1
+D=D-A
+A=D
+D=M
+@THAT
+M=D
+@R13
+D=M
+@2
+D=D-A
+A=D
+D=M
+@THIS
+M=D
+@R13
+D=M
+@3
+D=D-A
+A=D
+D=M
+@ARG
+M=D
+@R13
+D=M
+@4
+D=D-A
+A=D
+D=M
+@LCL
+M=D
+@R14
+A=M
+0;JMP

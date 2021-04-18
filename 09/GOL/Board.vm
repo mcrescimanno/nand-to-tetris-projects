@@ -1,0 +1,334 @@
+function Board.new 6
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+call Constants.getSCREEN_BASE_ROWS 0
+pop local 0
+call Cell.getCELL_HEIGHT 0
+pop local 1
+push local 0
+push local 1
+call Math.divide 2
+pop this 0
+push constant 32
+pop this 1
+push this 0
+call Array.new 1
+pop this 2
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 2
+push this 0
+lt
+not
+if-goto WHILE_END0
+push this 1
+call Array.new 1
+pop local 4
+push constant 0
+pop local 3
+label WHILE_EXP1
+push local 3
+push this 1
+lt
+not
+if-goto WHILE_END1
+push local 3
+push local 2
+push constant 0
+call Cell.new 3
+pop local 5
+push local 3
+push local 4
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP1
+label WHILE_END1
+push local 2
+push this 2
+add
+push local 4
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push pointer 0
+return
+function Board.getTotalNumberOfRows 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Board.getTotalNumberOfColumns 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Board.draw 4
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push this 0
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 2
+add
+pop pointer 1
+push that 0
+pop local 2
+push constant 0
+pop local 1
+label WHILE_EXP1
+push local 1
+push this 1
+lt
+not
+if-goto WHILE_END1
+push local 1
+push local 2
+add
+pop pointer 1
+push that 0
+pop local 3
+push local 3
+call Cell.draw 1
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Board.getCellAt 2
+push argument 0
+pop pointer 0
+push argument 2
+push this 2
+add
+pop pointer 1
+push that 0
+pop local 0
+push argument 1
+push local 0
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+return
+function Board.getCellStateAt 1
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+call Board.isCellOutOfBounds 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push pointer 0
+push argument 1
+push argument 2
+call Board.getCellAt 3
+pop local 0
+push local 0
+call Cell.isAlive 1
+return
+function Board.getNeighborsState 4
+push argument 0
+pop pointer 0
+push constant 8
+call Array.new 1
+pop local 0
+push argument 1
+call Cell.getX 1
+pop local 1
+push argument 1
+call Cell.getY 1
+pop local 2
+push constant 0
+push local 0
+add
+push pointer 0
+push local 1
+push local 2
+push constant 1
+sub
+call Board.getCellStateAt 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push local 0
+add
+push pointer 0
+push local 1
+push constant 1
+sub
+push local 2
+call Board.getCellStateAt 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+push local 0
+add
+push pointer 0
+push local 1
+push local 2
+push constant 1
+add
+call Board.getCellStateAt 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push local 0
+add
+push pointer 0
+push local 1
+push constant 1
+add
+push local 2
+call Board.getCellStateAt 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 4
+push local 0
+add
+push pointer 0
+push local 1
+push constant 1
+sub
+push local 2
+push constant 1
+sub
+call Board.getCellStateAt 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push local 0
+add
+push pointer 0
+push local 1
+push constant 1
+sub
+push local 2
+push constant 1
+add
+call Board.getCellStateAt 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push local 0
+add
+push pointer 0
+push local 1
+push constant 1
+add
+push local 2
+push constant 1
+sub
+call Board.getCellStateAt 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push local 0
+add
+push pointer 0
+push local 1
+push constant 1
+add
+push local 2
+push constant 1
+add
+call Board.getCellStateAt 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+return
+function Board.dispose 0
+push argument 0
+pop pointer 0
+push this 2
+call Memory.deAlloc 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Board.isCellOutOfBounds 5
+call Constants.getSCREEN_BASE_ROWS 0
+pop local 2
+call Cell.getCELL_HEIGHT 0
+pop local 0
+push argument 1
+push constant 1
+add
+push local 0
+call Math.multiply 2
+pop local 1
+push local 1
+push local 0
+lt
+push local 1
+push local 2
+gt
+or
+pop local 3
+push argument 0
+push constant 0
+lt
+push argument 0
+push constant 31
+gt
+or
+pop local 4
+push local 3
+push local 4
+or
+return
